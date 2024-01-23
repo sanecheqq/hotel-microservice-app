@@ -21,20 +21,14 @@ public class User {
     @Column(name = "login")
     private String login;
 
-    @Column(name = "full_name")
-    private String fullName;
-
-    @Column(name = "birthday")
-    private String birthday;
-
-    @Column(name = "phone_number")
-    private String phoneNumber;
+    @Column(name = "password")
+    private String password;
 
     @Column(name = "email")
     private String email;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "full_name")
+    private String fullName;
 
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
