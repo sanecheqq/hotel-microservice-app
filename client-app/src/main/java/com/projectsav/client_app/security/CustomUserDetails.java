@@ -2,15 +2,15 @@ package com.projectsav.client_app.security;
 
 import com.projectsav.client_app.model.User;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.Collections;
 
-@Component
+@Getter
 @AllArgsConstructor
 public class CustomUserDetails implements UserDetails {
     private String id;

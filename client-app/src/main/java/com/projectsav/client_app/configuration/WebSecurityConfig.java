@@ -56,8 +56,8 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-                        .requestMatchers("/api/ping").permitAll()
-                        .requestMatchers("/api/auth/login").permitAll()
+                        .requestMatchers("/ping").permitAll()
+                        .requestMatchers("/auth/login").permitAll()
                         .anyRequest().permitAll()
                 )
                 .userDetailsService(userDetailsService)

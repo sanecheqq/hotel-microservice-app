@@ -4,9 +4,9 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import io.jsonwebtoken.security.Keys;
 
 import java.security.Key;
 import java.util.Date;
@@ -21,7 +21,8 @@ public class JwtUtil {
     public String generateAccessToken(String username) {
         Date now = new Date();
         Date expired = new Date(now.getTime() + accessTokenExpirationMs);
-        return Jwts.builder()
+        return Jwts
+                .builder()
                 .setSubject(username)
                 .setIssuedAt(now)
                 .setExpiration(expired)
