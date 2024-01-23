@@ -3,7 +3,6 @@ package com.projectsav.client_app.controllers;
 import com.projectsav.client_app.exceptions.NoSuchUserException;
 import com.projectsav.client_app.messages.ExceptionResponse;
 import jakarta.validation.ConstraintViolationException;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
