@@ -26,15 +26,14 @@ public class DataInitializer implements ApplicationRunner {
     @Override
     @Transactional
     public void run(ApplicationArguments args) {
-        // TODO: change to liquibase migration
         if (userRepository.count() == 0) {
             fillDatabase();
         }
     }
 
     private void fillDatabase() {
-        User userUser = new User(null, "user", "pipi pupu", "23/09/2002", "1234", "abc@yandex.ru",
-                passwordEncoder.encode("user"), Role.USER);
+        User userUser = new User(null, "user", passwordEncoder.encode("user"),
+                "abc@email.ru", "pipi pupu", Role.USER);
         userRepository.saveAll(List.of(userUser));
     }
 }

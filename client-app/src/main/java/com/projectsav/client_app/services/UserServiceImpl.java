@@ -15,8 +15,8 @@ public class UserServiceImpl implements UserService {
     private final UserToUserDtoConverter userToUserDtoConverter;
 
     @Override
-    public UserDto getUserData(String userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new NoSuchUserException("No user " + userId));
+    public UserDto getUserData(String login) {
+        User user = userRepository.findByLogin(login).orElseThrow(() -> new NoSuchUserException("No user " + login));
         return userToUserDtoConverter.convert(user);
     }
 }
