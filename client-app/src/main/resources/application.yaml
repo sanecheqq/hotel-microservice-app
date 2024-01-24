@@ -1,8 +1,8 @@
-### Server config
+# Server config
 server:
   port:8080
 
-### Database config
+# App Config
 spring:
   application:
     name: client-backend
