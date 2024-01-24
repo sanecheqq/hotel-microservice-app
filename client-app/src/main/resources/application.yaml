@@ -4,6 +4,8 @@ server:
 
 ### Database config
 spring:
+  application:
+    name: client-backend
   datasource:
     driver-class-name: org.postgresql.Driver
     url: ${POSTGRES_URL}
@@ -15,7 +17,15 @@ spring:
     generate-ddl: true
     show-sql: true
 
-#JWT
+# Discovery client config
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_HOST:http://localhost:8090/eureka/}
+  instance:
+    instance-id: client-backend-instance-${random.uuid}
+
+# JWT
 token:
   expire-time: 1800000
 
