@@ -1,0 +1,25 @@
+### Server config
+server:
+  port:8080
+
+### Database config
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${POSTGRES_URL}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: create
+    generate-ddl: true
+    show-sql: true
+
+#JWT
+token:
+  expire-time: 1800000
+
+# For local testing
+POSTGRES_URL: jdbc:postgresql://localhost:5432/clients
+POSTGRES_USER: postgres
+POSTGRES_PASSWORD: postgres
