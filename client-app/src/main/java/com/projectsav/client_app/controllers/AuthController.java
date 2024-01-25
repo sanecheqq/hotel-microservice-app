@@ -1,7 +1,7 @@
 package com.projectsav.client_app.controllers;
 
-import com.projectsav.client_app.messages.auth.AuthRequest;
 import com.projectsav.client_app.messages.auth.AuthResponse;
+import com.projectsav.client_app.messages.auth.AuthRequest;
 import com.projectsav.client_app.services.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

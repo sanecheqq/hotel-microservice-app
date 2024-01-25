@@ -1,7 +1,7 @@
 package com.projectsav.client_app.services;
 
-import com.projectsav.client_app.messages.auth.AuthRequest;
 import com.projectsav.client_app.messages.auth.AuthResponse;
+import com.projectsav.client_app.messages.auth.AuthRequest;
 import com.projectsav.client_app.model.User;
 import com.projectsav.client_app.repositories.UserRepository;
 import com.projectsav.client_app.security.JwtUtil;
@@ -21,8 +21,8 @@ public class AuthServiceImpl implements AuthService {
 
     public AuthResponse authUser(AuthRequest authRequest) {
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(authRequest.getLogin(), authRequest.getPassword()));
-        User user = userRepository.findByLogin(authRequest.getLogin()).orElseThrow(NoSuchElementException::new);
+                new UsernamePasswordAuthenticationToken(authRequest.login(), authRequest.password()));
+        User user = userRepository.findByLogin(authRequest.login()).orElseThrow(NoSuchElementException::new);
         return generateUserAccessTokens(user);
     }
 

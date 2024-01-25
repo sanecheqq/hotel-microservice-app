@@ -9,13 +9,14 @@ import org.springframework.stereotype.Component;
 public class UserToUserDtoConverter implements Converter<User, UserDto> {
     @Override
     public UserDto convert(User user) {
-        UserDto userDto = new UserDto();
-        userDto.setId(user.getId());
-        userDto.setLogin(user.getLogin());
-        userDto.setPasswordHash(user.getPassword());
-        userDto.setEmail(user.getEmail());
-        userDto.setFullName(user.getFullName());
-        userDto.setRole(user.getRole());
+        UserDto userDto = new UserDto(
+                user.getId(),
+                user.getLogin(),
+                user.getPassword(),
+                user.getEmail(),
+                user.getFullName(),
+                user.getRole()
+        );
         return userDto;
     }
 }
