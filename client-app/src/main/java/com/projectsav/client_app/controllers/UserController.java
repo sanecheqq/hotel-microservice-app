@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,19 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/user/{user_login}")
-    public ResponseEntity<UserDto> getUserData(
-            @PathVariable(name = "user_login") String login
-    ) {
-        UserDto userData = userService.getUserData(login);
-        return ResponseEntity.status(HttpStatus.OK).body(userData);
-    }
-
     @GetMapping("/user")
-    public String getUserByToken(
+    public ResponseEntity<UserDto> getUserByToken(
             @AuthenticationPrincipal CustomUserDetails userDetails
     ) {
-        return userDetails.getUsername();
+        UserDto userData = userService.getUserData(userDetails.getId());
+        return ResponseEntity.status(HttpStatus.OK).body(userData);
     }
 
 }
