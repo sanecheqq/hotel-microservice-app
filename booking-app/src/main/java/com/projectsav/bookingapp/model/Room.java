@@ -13,13 +13,13 @@ import lombok.Setter;
 public class Room {
     @Id
     @GeneratedValue
-    Long number; // room number - unique value
+    private Long number; // room number - unique value
 
     @Column(name = "price")
-    float price;
+    private float price;
 
     @Column(name = "type")
-    RoomType type;
+    private RoomType type;
 }
 
 
