@@ -4,8 +4,8 @@ server:
 
 # App Config
 spring:
-#  application:
-#    name: client-backend
+  application:
+    name: booking-backend
   datasource:
     driver-class-name: org.postgresql.Driver
     url: ${POSTGRES_URL}
@@ -18,12 +18,12 @@ spring:
     show-sql: true
 
 # Discovery client config
-#eureka:
-#  client:
-#    serviceUrl:
-#      defaultZone: ${EUREKA_HOST:http://localhost:8090/eureka/}
-#  instance:
-#    instance-id: client-backend-instance-${random.uuid}
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_HOST:http://localhost:8090/eureka/}
+  instance:
+    instance-id: booking-backend-instance-${random.uuid}
 
 # For local testing
 POSTGRES_URL: jdbc:postgresql://localhost:5432/booking
