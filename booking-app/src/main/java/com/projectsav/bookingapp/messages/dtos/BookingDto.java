@@ -1,4 +1,6 @@
 package com.projectsav.bookingapp.messages.dtos;
 
-public record BookingDto() {//TODO: fields
+import com.projectsav.bookingapp.model.Room;
+
+public record BookingDto(String id, Room room, String start, String end, String cliendId) {
 }
