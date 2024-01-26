@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 public class BookingController {
     private final AuthService authService;
     private final BookingService bookingService;
+
     @PostMapping("/{room_number}")
     public ResponseEntity<BookingDto> bookRoom(
             @PathVariable(name = "room_number") Long roomNumber,
@@ -26,6 +27,7 @@ public class BookingController {
             @RequestHeader("Authorization") String authHeader
     ) {
         UserDto userData = authService.getUserData(authHeader);
-        return ResponseEntity.status(HttpStatus.OK).body(new BookingDto());
+        BookingDto bookingDto = bookingService.bookRoom(roomNumber, startDate, endDate, userData);
+        return ResponseEntity.status(HttpStatus.OK).body(bookingDto);
     }
 }
