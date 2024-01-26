@@ -30,13 +30,4 @@ public class AuthServiceImpl implements AuthService {
         restTemplate.setInterceptors(interceptors);
         return restTemplate.getForObject(getUserByTokenUri, UserDto.class);
     }
-
-    private String parseAuthHeader(String authHeader) {
-        if (authHeader.startsWith("Bearer ")) {
-            return authHeader.substring(7);
-        }
-        return "";
-    }
-
-
 }
