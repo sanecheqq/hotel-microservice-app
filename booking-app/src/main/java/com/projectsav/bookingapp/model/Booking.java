@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String uuid;
+    private String id;
 
     @ManyToOne
     @JoinColumn(name = "number")

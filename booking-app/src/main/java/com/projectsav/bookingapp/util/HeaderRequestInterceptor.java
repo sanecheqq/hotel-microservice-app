@@ -1,4 +1,4 @@
-package com.projectsav.bookingapp.aop;
+package com.projectsav.bookingapp.util;
 
 import lombok.NonNull;
 import org.springframework.http.HttpRequest;

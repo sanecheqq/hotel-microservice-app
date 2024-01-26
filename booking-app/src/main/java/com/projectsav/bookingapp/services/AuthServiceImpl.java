@@ -1,6 +1,6 @@
 package com.projectsav.bookingapp.services;
 
-import com.projectsav.bookingapp.aop.HeaderRequestInterceptor;
+import com.projectsav.bookingapp.util.HeaderRequestInterceptor;
 import com.projectsav.bookingapp.messages.dtos.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.client.ServiceInstance;
