@@ -10,6 +10,9 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 @Profile("!test")
@@ -27,7 +30,10 @@ public class DataInitializer implements ApplicationRunner {
     }
 
     private void fillDatabase() {
-        Room room1 = new Room(201L, 100, RoomType.BUSINESS);
-        roomRepository.save(room1);
+        List<Room> rooms = new ArrayList<>();
+        for (long i = 0; i < 10; i++) {
+            rooms.add(new Room(200 + i, 100 + i*13, RoomType.BUSINESS));
+        }
+        roomRepository.saveAll(rooms);
     }
 }
