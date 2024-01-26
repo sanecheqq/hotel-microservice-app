@@ -1,9 +1,10 @@
 package com.projectsav.bookingapp.services;
 
 import com.projectsav.bookingapp.messages.dtos.BookingDto;
+import com.projectsav.bookingapp.messages.dtos.UserDto;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public interface BookingService {
-    BookingDto bookRoom(Long roomNumber, Timestamp startDate, Timestamp endDate, String clientId);
+    BookingDto bookRoom(Long roomNumber, LocalDateTime startDate, LocalDateTime endDate, UserDto clientId);
 }
