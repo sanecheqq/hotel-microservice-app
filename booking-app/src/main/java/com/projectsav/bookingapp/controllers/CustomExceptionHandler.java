@@ -1,5 +1,6 @@
 package com.projectsav.bookingapp.controllers;
 
+import com.projectsav.bookingapp.exceptions.RoomIsAlreadyBookedException;
 import com.projectsav.bookingapp.messages.ExceptionResponse;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpHeaders;
@@ -23,6 +24,10 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(new RuntimeException("No user exists by provided JWT. Authorize"), HttpStatus.UNAUTHORIZED);
     }
 
+    @ExceptionHandler(RoomIsAlreadyBookedException.class)
+    public ResponseEntity<Object> handleAlreadyBookedException(Exception e) {
+        return handleExceptionInternal(e, HttpStatus.BAD_REQUEST);
+    }
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<Object> handleConstraintViolation(ConstraintViolationException e) {
