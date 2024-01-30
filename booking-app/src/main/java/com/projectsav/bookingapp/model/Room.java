@@ -1,10 +1,10 @@
 package com.projectsav.bookingapp.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,6 +22,9 @@ public class Room {
 
     @Column(name = "type")
     private RoomType type;
+
+    @OneToMany(mappedBy = "room")
+    private List<Booking> bookings = new ArrayList<>();
 }
 
 

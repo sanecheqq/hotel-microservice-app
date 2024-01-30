@@ -32,7 +32,7 @@ public class DataInitializer implements ApplicationRunner {
     private void fillDatabase() {
         List<Room> rooms = new ArrayList<>();
         for (long i = 0; i < 10; i++) {
-            rooms.add(new Room(200 + i, 100 + i*13, RoomType.BUSINESS));
+            rooms.add(new Room(200 + i, 100 + i*13, RoomType.BUSINESS, new ArrayList<>()));
         }
         roomRepository.saveAll(rooms);
     }
