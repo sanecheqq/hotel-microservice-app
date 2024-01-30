@@ -2,7 +2,7 @@ package com.projectsav.bookingapp.services;
 
 import com.projectsav.bookingapp.exceptions.RoomIsAlreadyBookedException;
 import com.projectsav.bookingapp.messages.dtos.BookingDto;
-import com.projectsav.bookingapp.messages.dtos.UserDto;
+import com.projectsav.bookingapp.external.messages.dtos.UserDto;
 import com.projectsav.bookingapp.model.Booking;
 import com.projectsav.bookingapp.model.Room;
 import com.projectsav.bookingapp.repositories.BookingRepository;

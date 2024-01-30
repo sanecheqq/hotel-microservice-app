@@ -1,7 +1,7 @@
 package com.projectsav.bookingapp.services;
 
 import com.projectsav.bookingapp.messages.dtos.BookingDto;
-import com.projectsav.bookingapp.messages.dtos.UserDto;
+import com.projectsav.bookingapp.external.messages.dtos.UserDto;
 
 import java.time.LocalDateTime;
 

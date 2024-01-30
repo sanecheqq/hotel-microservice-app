@@ -1,7 +1,7 @@
-package com.projectsav.bookingapp.services;
+package com.projectsav.bookingapp.external.services;
 
 import com.projectsav.bookingapp.util.HeaderRequestInterceptor;
-import com.projectsav.bookingapp.messages.dtos.UserDto;
+import com.projectsav.bookingapp.external.messages.dtos.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -21,7 +21,7 @@ public class AuthServiceImpl implements AuthService {
     private final DiscoveryClient discoveryClient;
 
     @Override
-    public UserDto getUserData(String authHeader) {
+    public UserDto getUserDataFromClientApp(String authHeader) {
         ServiceInstance backendInstance = discoveryClient.getInstances("client-backend").get(0);
         URI getUserByTokenUri = backendInstance.getUri().resolve("/users/user");
 

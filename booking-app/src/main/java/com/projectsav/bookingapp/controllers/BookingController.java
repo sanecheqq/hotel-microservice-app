@@ -1,8 +1,8 @@
 package com.projectsav.bookingapp.controllers;
 
 import com.projectsav.bookingapp.messages.dtos.BookingDto;
-import com.projectsav.bookingapp.messages.dtos.UserDto;
-import com.projectsav.bookingapp.services.AuthService;
+import com.projectsav.bookingapp.external.messages.dtos.UserDto;
+import com.projectsav.bookingapp.external.services.AuthService;
 import com.projectsav.bookingapp.services.BookingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -26,7 +26,7 @@ public class BookingController {
             @RequestParam(name = "end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
             @RequestHeader("Authorization") String authHeader
     ) {
-        UserDto userData = authService.getUserData(authHeader);
+        UserDto userData = authService.getUserDataFromClientApp(authHeader);
         BookingDto bookingDto = bookingService.bookRoom(roomNumber, startDate, endDate, userData);
         return ResponseEntity.status(HttpStatus.OK).body(bookingDto);
     }
