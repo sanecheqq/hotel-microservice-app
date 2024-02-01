@@ -24,10 +24,20 @@ public class BookingController {
             @PathVariable(name = "room_number") Long roomNumber,
             @RequestParam(name = "start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
             @RequestParam(name = "end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
-            @RequestHeader("Authorization") String authHeader
+            @RequestHeader("Authorization") String authorizationHeader
     ) {
-        UserDto userData = authService.getUserDataFromClientApp(authHeader);
-        BookingDto bookingDto = bookingService.bookRoom(roomNumber, startDate, endDate, userData);
+        UserDto userDto = authService.getUserDataFromClientApp(authorizationHeader);
+        BookingDto bookingDto = bookingService.bookRoom(roomNumber, startDate, endDate, userDto);
         return ResponseEntity.status(HttpStatus.OK).body(bookingDto);
+    }
+
+    @DeleteMapping("/{booking_id}")
+    public ResponseEntity<?> deleteBooking(
+            @PathVariable(name = "booking_id") String bookingId,
+            @RequestHeader("Authorization") String authorizationHeader
+    ) {
+        UserDto userDto = authService.getUserDataFromClientApp(authorizationHeader);
+        bookingService.deleteBookingRoom(bookingId, userDto);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

@@ -7,4 +7,6 @@ import java.time.LocalDateTime;
 
 public interface BookingService {
     BookingDto bookRoom(Long roomNumber, LocalDateTime startDate, LocalDateTime endDate, UserDto clientId);
+
+    void deleteBookingRoom(String bookingId, UserDto userDto);
 }
