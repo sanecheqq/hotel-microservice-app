@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.sql.Timestamp;
 
@@ -12,6 +13,7 @@ import java.sql.Timestamp;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "booking")
+@ToString
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -19,6 +21,7 @@ public class Booking {
 
     @ManyToOne
     @JoinColumn(name = "number")
+    @ToString.Exclude
     private Room room;
 
     @Column(name = "booking_start")
