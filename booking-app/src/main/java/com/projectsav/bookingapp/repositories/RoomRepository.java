@@ -16,8 +16,8 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
         Verification condition are the same as in the BookingRepository, but also we need to make left join with booking table
         to check all bookings for current room.
      */
-    @Query("SELECT DISTINCT r FROM Room r LEFT JOIN r.bookings " +
-        "WHERE NOT EXISTS (" +
+    @Query("SELECT DISTINCT r FROM Room r LEFT JOIN r.bookings WHERE " +
+        "NOT EXISTS (" +
             "SELECT 1 FROM Booking b WHERE " +
                 "b.room = r AND (" +
                         "   (:start BETWEEN b.start AND b.end) " +
