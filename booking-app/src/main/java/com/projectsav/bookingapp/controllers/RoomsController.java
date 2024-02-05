@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class RoomsController {
     private final RoomService roomService;
 
-    @GetMapping("/get-all")
+    @GetMapping("")
     public ResponseEntity<GetAllRoomsResponse> getAllRooms() {
         GetAllRoomsResponse response = roomService.getAllRooms();
         return ResponseEntity.ok(response);
