@@ -9,4 +9,6 @@ public interface BookingService {
     BookingDto bookRoom(Long roomNumber, LocalDateTime startDate, LocalDateTime endDate, UserDto clientId);
 
     void deleteBookingRoom(String bookingId, UserDto userDto);
+
+    BookingDto changeBookingRoomNumber(String bookingId, Long newRoomNumber, UserDto userDto);
 }

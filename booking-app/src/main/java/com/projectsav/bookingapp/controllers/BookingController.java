@@ -26,8 +26,7 @@ public class BookingController {
             @RequestHeader("Authorization") String authorizationHeader
     ) {
         UserDto userDto = getUserDataFromClientApp(authorizationHeader);
-        BookingDto bookingDto = bookingService.bookRoom(roomNumber, startDate, endDate, userDto);
-        return ResponseEntity.ok(bookingDto);
+        return ResponseEntity.ok(bookingService.bookRoom(roomNumber, startDate, endDate, userDto));
     }
 
     @DeleteMapping("/{booking_id}")
@@ -38,6 +37,16 @@ public class BookingController {
         UserDto userDto = getUserDataFromClientApp(authorizationHeader);
         bookingService.deleteBookingRoom(bookingId, userDto);
         return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/{booking_id}")
+    public ResponseEntity<BookingDto> changeBookingRoomNumber(
+            @PathVariable(name = "booking_id") String bookingId,
+            @RequestParam(name = "new_room_number") Long newRoomNumber,
+            @RequestHeader("Authorization") String authorizationHeader
+    ) {
+        UserDto userDto = getUserDataFromClientApp(authorizationHeader);
+        return ResponseEntity.ok(bookingService.changeBookingRoomNumber(bookingId, newRoomNumber, userDto));
     }
 
     private UserDto getUserDataFromClientApp(String authorizationHeader) {
