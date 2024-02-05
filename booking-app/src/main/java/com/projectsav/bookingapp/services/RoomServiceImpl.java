@@ -1,5 +1,6 @@
 package com.projectsav.bookingapp.services;
 
+import com.projectsav.bookingapp.exceptions.RoomNotFoundException;
 import com.projectsav.bookingapp.messages.rooms.GetAllRoomsResponse;
 import com.projectsav.bookingapp.model.Room;
 import com.projectsav.bookingapp.repositories.RoomRepository;
@@ -13,6 +14,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RoomServiceImpl implements RoomService {
     private final RoomRepository roomRepository;
+
+    @Override
+    public Room getRoomByNumber(Long number) {
+        return roomRepository.findById(number)
+                .orElseThrow(() -> new RoomNotFoundException("No room entity with number " + number));
+    }
 
     @Override
     public GetAllRoomsResponse getAllRooms() {
