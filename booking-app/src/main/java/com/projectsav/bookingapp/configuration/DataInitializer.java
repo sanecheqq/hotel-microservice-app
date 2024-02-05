@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Component
 @RequiredArgsConstructor
@@ -30,9 +31,14 @@ public class DataInitializer implements ApplicationRunner {
     }
 
     private void fillDatabase() {
+        Random random = new Random();
         List<Room> rooms = new ArrayList<>();
         for (long i = 0; i < 10; i++) {
-            rooms.add(new Room(200 + i, 100 + i*13, RoomType.BUSINESS, new ArrayList<>()));
+            rooms.add(new Room(200 + i, random.nextFloat(300), RoomType.STANDARD, new ArrayList<>()));
+        }
+
+        for (long i = 5; i < 10; i++) {
+            rooms.add(new Room(300 + i, random.nextFloat(400), RoomType.BUSINESS, new ArrayList<>()));
         }
         roomRepository.saveAll(rooms);
     }
