@@ -15,14 +15,15 @@ public interface BookingRepository extends JpaRepository<Booking, String> {
          visually: [      (       )       ] - b.s and b.e are b.start and b.end
                  :start   b.s    b.e    :end
      */
-    @Query("SELECT b FROM Booking b WHERE " +
-            "b.room.number = :roomNum " +
-            "AND (" +
-                "   (:start BETWEEN b.start AND b.end) " +
-                "OR (:end BETWEEN b.start AND b.end) " +
-                "OR (:start <= b.start AND b.end <= :end)" +
-            ")"
-    )
+    @Query(value = """
+        SELECT b FROM Booking b
+        WHERE b.room.number = :roomNum
+            AND (
+                (:start BETWEEN b.start AND b.end)
+                OR (:end BETWEEN b.start AND b.end)
+                OR (:start <= b.start AND b.end <= :end)
+            )
+    """)
     List<Booking> getRoomsWithIntersectingDate(
             @Param("roomNum") Long roomNumber,
             @Param("start") Timestamp start,
