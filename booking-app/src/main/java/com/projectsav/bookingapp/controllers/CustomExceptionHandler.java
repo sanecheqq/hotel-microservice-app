@@ -1,6 +1,6 @@
 package com.projectsav.bookingapp.controllers;
 
-import com.projectsav.bookingapp.exceptions.RoomIsAlreadyBookedException;
+import com.projectsav.bookingapp.exceptions.*;
 import com.projectsav.bookingapp.messages.ExceptionResponse;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpHeaders;
@@ -27,6 +27,22 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(RoomIsAlreadyBookedException.class)
     public ResponseEntity<Object> handleAlreadyBookedException(Exception e) {
         return handleExceptionInternal(e, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler({
+            BadDatesParametersException.class,
+            BadUserDataException.class
+    })
+    public ResponseEntity<Object> handleBadParameterException(Exception e) {
+        return handleExceptionInternal(e, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler({
+            BookingNotFoundException.class,
+            RoomNotFoundException.class
+    })
+    public ResponseEntity<Object> handleNotFoundException(Exception e) {
+        return handleExceptionInternal(e, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
