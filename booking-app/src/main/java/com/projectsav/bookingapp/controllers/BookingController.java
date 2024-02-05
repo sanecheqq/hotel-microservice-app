@@ -28,7 +28,7 @@ public class BookingController {
     ) {
         UserDto userDto = authService.getUserDataFromClientApp(authorizationHeader);
         BookingDto bookingDto = bookingService.bookRoom(roomNumber, startDate, endDate, userDto);
-        return ResponseEntity.status(HttpStatus.OK).body(bookingDto);
+        return ResponseEntity.ok(bookingDto);
     }
 
     @DeleteMapping("/{booking_id}")
@@ -38,6 +38,6 @@ public class BookingController {
     ) {
         UserDto userDto = authService.getUserDataFromClientApp(authorizationHeader);
         bookingService.deleteBookingRoom(bookingId, userDto);
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.ok().build();
     }
 }
