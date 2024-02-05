@@ -11,13 +11,13 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public interface RoomRepository extends JpaRepository<Room, Long> {
-    /*
-        Find all available rooms which can be booked on provided start and end dates (from start to end),
+
+    /**
+        Finds all available rooms which can be booked on provided start and end dates (from start to end),
         also the type and max-min prices parameters are taken into account.
         Verification condition are the same as in the BookingRepository, but also we need to make left join with booking table
         to check all bookings for current room.
      */
-
     @Query(value = """
         SELECT DISTINCT r FROM Room r LEFT JOIN r.bookings
         WHERE (:room_type IS NULL OR :room_type = r.type)
@@ -60,7 +60,6 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
                     )
             )
     """)
-
     List<Room> getAvailableRoomsByRoomTypeAndMaxPriceAndMinPriceAndStartAndEndDates(
             @Param("room_type") RoomType roomType,
             @Param("max_price") Float maxPrice,
