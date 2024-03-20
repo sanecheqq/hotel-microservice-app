@@ -24,7 +24,7 @@ public interface BookingRepository extends JpaRepository<Booking, String> {
                 OR (:start <= b.start AND b.end <= :end)
             )
     """)
-    List<Booking> getRoomsWithIntersectingDate(
+    List<Booking> getRoomsWithOvelappingDates(
             @Param("roomNum") Long roomNumber,
             @Param("start") Timestamp start,
             @Param("end") Timestamp end

@@ -66,15 +66,46 @@ public class BookingServiceImpl implements BookingService {
         return boookingToBookingDtoConverter.convert(booking);
     }
 
+    @Override
+    public BookingDto changeBookingDates(String bookingId, LocalDateTime startDate, LocalDateTime endDate, UserDto userDto) {
+        Booking booking = getBooking(bookingId);
+
+        checkThatClientIsCorrect(booking, userDto);
+
+        LocalDateTime newStartDate = startDate == null ? booking.getStart().toLocalDateTime() : startDate;
+        LocalDateTime newEndDate = endDate == null ? booking.getEnd().toLocalDateTime() : endDate;
+
+        if (newStartDate.isAfter(newEndDate) || newStartDate.isEqual(newEndDate)) {
+            throw new BadDatesParametersException("Start date " + startDate + "  must be less than end " + endDate);
+        }
+
+        checkThatChangingDatesIsPossible(booking, newStartDate, newEndDate);
+
+        booking.setStart(Timestamp.valueOf(newStartDate));
+        booking.setEnd(Timestamp.valueOf(newEndDate));
+        saveBooking(booking);
+        return boookingToBookingDtoConverter.convert(booking);
+    }
+
     private void checkThatClientIsCorrect(Booking booking, UserDto userDto) {
         if (!booking.getClientId().equals(userDto.id())) {
             throw new BadUserDataException("User id " + userDto.id() + " does not match with " + booking.getClientId());
         }
     }
 
-    public void checkThatRoomIsAvailable(Long roomNumber, LocalDateTime startDate, LocalDateTime endDate) {
-        List<Booking> rooms = bookingRepository.getRoomsWithIntersectingDate(roomNumber, Timestamp.valueOf(startDate), Timestamp.valueOf(endDate));
-        if (!rooms.isEmpty()) {
+    private void checkThatRoomIsAvailable(Long roomNumber, LocalDateTime startDate, LocalDateTime endDate) {
+        List<Booking> bookings = bookingRepository.getRoomsWithOvelappingDates(roomNumber, Timestamp.valueOf(startDate), Timestamp.valueOf(endDate));
+        if (!bookings.isEmpty()) {
+            throw new RoomIsAlreadyBookedException("The booking dates overlap");
+        }
+    }
+
+    private void checkThatChangingDatesIsPossible(Booking booking, LocalDateTime startDate, LocalDateTime endDate) {
+        List<Booking> bookings = bookingRepository.getRoomsWithOvelappingDates(booking.getRoom().getNumber(), Timestamp.valueOf(startDate), Timestamp.valueOf(endDate));
+        if (bookings.size() == 1 && bookings.get(0).getId().equals(booking.getId())) {
+            return;
+        }
+        if (!bookings.isEmpty()) {
             throw new RoomIsAlreadyBookedException("The booking dates overlap");
         }
     }

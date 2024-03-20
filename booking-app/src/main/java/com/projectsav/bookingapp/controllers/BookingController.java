@@ -39,7 +39,18 @@ public class BookingController {
         return ResponseEntity.ok().build();
     }
 
-    @PatchMapping("/{booking_id}")
+    @PatchMapping("/{booking_id}:dates")
+    public ResponseEntity<BookingDto> changeBookingDates(
+            @PathVariable(name = "booking_id") String bookingId,
+            @RequestParam(name = "start", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+            @RequestParam(name = "end", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
+            @RequestHeader("Authorization") String authorizationHeader
+    ) {
+        UserDto userDto = getUserDataFromClientApp(authorizationHeader);
+        return ResponseEntity.ok(bookingService.changeBookingDates(bookingId, startDate, endDate, userDto));
+    }
+
+    @PatchMapping("/{booking_id}:room")
     public ResponseEntity<BookingDto> changeBookingRoomNumber(
             @PathVariable(name = "booking_id") String bookingId,
             @RequestParam(name = "new_room_number") Long newRoomNumber,

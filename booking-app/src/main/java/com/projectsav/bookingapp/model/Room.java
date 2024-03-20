@@ -21,6 +21,7 @@ public class Room {
     private float price;
 
     @Column(name = "type")
+    @Enumerated(EnumType.STRING)
     private RoomType type;
 
     @OneToMany(mappedBy = "room")

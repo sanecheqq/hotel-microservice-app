@@ -1,4 +1,9 @@
 package com.projectsav.bookingapp.messages;
 
-public record ExceptionResponse(String errorMessage) {
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public record ExceptionResponse(
+        @JsonProperty("error_message")
+        String errorMessage
+) {
 }

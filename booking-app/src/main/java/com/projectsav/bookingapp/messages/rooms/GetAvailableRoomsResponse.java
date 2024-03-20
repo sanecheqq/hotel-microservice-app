@@ -5,5 +5,8 @@ import com.projectsav.bookingapp.messages.dtos.RoomDto;
 
 import java.util.List;
 
-public record GetAvailableRoomsResponse(@JsonProperty("available_rooms") List<RoomDto> availableRooms) {
+public record GetAvailableRoomsResponse(
+        @JsonProperty("available_rooms")
+        List<RoomDto> availableRooms
+) {
 }
